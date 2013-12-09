@@ -1,0 +1,7 @@
+---
+- name: apt packages
+  apt: pkg={{item}}
+  with_items:
+  - nginx
+- service: name=nginx state=stopped
+
