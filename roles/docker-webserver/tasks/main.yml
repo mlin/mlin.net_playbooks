@@ -4,4 +4,6 @@
   with_items:
   - nginx
 - service: name=nginx state=stopped
-
+- name: deploy content
+  git: repo=https://github.com/mlin/mlin.net.git dest=/mlin.net depth=1 
+- copy: src=sites-enabled.mlin.net dest=/etc/nginx/sites-enabled/mlin.net mode=0644 owner=root group=root
