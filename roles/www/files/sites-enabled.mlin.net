@@ -18,10 +18,10 @@
 ##
 
 server {
-	listen   8080;
+	listen   80;
 	#listen   [::]:80 default_server ipv6only=on; ## listen for ipv6
 
-	root /mlin.net;
+	root /home/mlin/www;
 	index index.html index.htm;
 
 	server_name www.mlin.net shaped-network-420.mlin.net;
@@ -80,7 +80,7 @@ server {
 
 # redirect http://mlin.net to http://www.mlin.net
 server {
-        listen 8080;
+        listen 80;
         server_name mlin.net;
         return 301 $scheme://www.mlin.net$request_uri;
 }
