@@ -1,0 +1,2 @@
+#!/bin/bash
+ansible-pull -d /etc/mlin.net_playbooks -U https://github.com/mlin/mlin.net_playbooks.git -i 'localhost,'
