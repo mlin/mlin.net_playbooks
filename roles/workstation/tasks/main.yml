@@ -1,0 +1,45 @@
+---
+- lineinfile: dest=/etc/ssh/sshd_config regexp=^PermitRootLogin line="PermitRootLogin no"
+- lineinfile: dest=/etc/ssh/sshd_config regexp=^RSAAuthentication line="RSAAuthentication no"
+- lineinfile: dest=/etc/ssh/sshd_config regexp=^PubkeyAuthentication line="PubkeyAuthentication no"
+- lineinfile: dest=/etc/sudoers.d/50-mlin create=yes line="mlin ALL=(ALL) NOPASSWD:ALL"
+- file: path=/etc/sudoers.d/50-mlin owner=root group=root mode=0440
+- name: apt
+  apt: upgrade=full
+- apt: pkg={{item}}
+  with_items:
+  - ntp
+  - mosh
+  - byobu
+  - unattended-upgrades
+  - htop
+  - dstat
+  - secure-delete
+  - build-essential
+  - git
+  - docker.io
+- name: configure unattended upgrades
+  copy: src=10periodic dest=/etc/apt/apt.conf.d/10periodic
+- shell: sudo -H -u mlin bash -ex -c "yes '' | byobu-enable" || true
+- name: dx-toolkit signing key
+  apt_key: url=https://wiki.dnanexus.com/images/files/ubuntu-signing-key.gpg
+- name: additional apt repositories
+  apt_repository: repo="{{item}}"
+  with_items:
+  - ppa:x2go/stable
+  - ppa:webupd8team/sublime-text-3
+  - "deb http://dnanexus-apt-prod.s3.amazonaws.com/ubuntu trusty/amd64/"
+- name: desktop packages
+  apt: pkg={{item}}
+  with_items:
+  - xubuntu-desktop
+  - x2goserver
+  - x2goserver-xsession
+  - sublime-text-installer
+  - dx-toolkit
+- name: disable default user accounts
+  command: chage -E 0 {{item}}
+  with_items:
+  - ubuntu
+  - mlin_mlin_net
+- file: path=/etc/sudoers.d/90-cloud-init-users state=absent
