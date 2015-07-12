@@ -3,6 +3,7 @@
 - lineinfile: dest=/etc/ssh/sshd_config regexp=^RSAAuthentication line="RSAAuthentication no"
 - lineinfile: dest=/etc/ssh/sshd_config regexp=^PubkeyAuthentication line="PubkeyAuthentication no"
 - lineinfile: dest=/etc/sudoers.d/50-mlin create=yes line="mlin ALL=(ALL) NOPASSWD:ALL"
+- command: dpkg-statoverride --update --add root sudo 4750 /bin/su
 - file: path=/etc/sudoers.d/50-mlin owner=root group=root mode=0440
 - name: apt
   apt: upgrade=full
