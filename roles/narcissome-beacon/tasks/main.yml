@@ -18,7 +18,7 @@
   get_url:
     url: "https://github.com/mlin/narcissome-beacon/releases/download/{{ TAG }}/beacon_server"
     dest: /home/mlin/beacon/beacon_server
-    mode: 0700
+    mode: 0750
     owner: mlin
     group: mlin-beacon
     force: yes
