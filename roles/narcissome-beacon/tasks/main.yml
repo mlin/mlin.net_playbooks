@@ -1,0 +1,37 @@
+---
+- name: apt packages
+  apt: pkg={{item}}
+  with_items:
+  - libsnappy1
+- group: name=mlin-beacon state=present
+- user: name=mlin-beacon group=mlin-beacon state=present createhome=no expires=0
+- name: directory permissions
+  file:
+    path: /home/mlin/beacon
+    state: directory
+    owner: mlin
+    group: mlin-beacon
+    mode: u=rwX,g=rX,o=rX
+    recurse: yes
+- name: server executable
+  get_url:
+    url: https://github.com/mlin/narcissome-beacon/releases/download/v0.0.1/beacon_server
+    dest: /home/mlin/beacon/beacon_server
+    mode: 0700
+    owner: mlin
+    group: mlin-beacon
+- name: log directory
+  file:
+    path: /var/log/beacon
+    state: directory
+    owner: mlin-beacon
+    group: mlin-beacon
+    mode: u=rwX,g=rX,o=rX
+    recurse: yes
+- copy: src=narcissome-beacon.sh dest=/home/mlin/beacon/narcissome-beacon.sh mode=0755
+- name: systemd service
+  copy: src=narcissome-beacon.service dest=/etc/systemd/system/narcissome-beacon.service mode=0644 owner=root group=root
+- service: name=narcissome-beacon state=started enabled=yes
+- name: configure nginx
+  copy: src=sites-enabled.narcissome.mlin.net dest=/etc/nginx/sites-enabled/narcissome.mlin.net mode=0644 owner=root group=root
+- service: name=nginx enabled=yes state=reloaded

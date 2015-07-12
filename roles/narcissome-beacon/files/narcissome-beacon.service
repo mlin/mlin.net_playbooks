@@ -1,0 +1,9 @@
+[Unit]
+Description=mlin-beacon
+
+[Service]
+ExecStart=/bin/bash -e /home/mlin/beacon/narcissome-beacon.sh
+User=mlin-beacon
+
+[Install]
+WantedBy=multi-user.target
