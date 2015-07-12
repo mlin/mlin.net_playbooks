@@ -1,0 +1,7 @@
+---
+# Play:   run_role.yml
+# Usage:  ansible-playbook -i localhost, /path/to/run_role.yml -e "ROLE=<role>"
+- hosts: localhost
+  connection: local
+  roles:
+  - { role: '{{ROLE}}' }
