@@ -30,5 +30,7 @@ Access: `mosh mlin@hostname` or x2go
 
 Execute playbook: `sudo /etc/mlin.net_playbooks/execute`
 
+Update beacon: `sudo ansible-playbook -i localhost, /etc/mlin.net_playbooks/run_role.yml -e "ROLE=narcissome-beacon"`
+
 Loggly setup ([linux](https://mlin.loggly.com/sources/setup/linux) [nginx](https://mlin.loggly.com/sources/setup/nginx) [file](https://mlin.loggly.com/sources/setup/file_monitoring_linux))
 
