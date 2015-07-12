@@ -29,3 +29,6 @@ service ssh restart
 Access: `mosh mlin@hostname` or x2go
 
 Execute playbook: `sudo /etc/mlin.net_playbooks/execute`
+
+Loggly setup ([linux](https://mlin.loggly.com/sources/setup/linux) [nginx](https://mlin.loggly.com/sources/setup/nginx) [file](https://mlin.loggly.com/sources/setup/file_monitoring_linux))
+
