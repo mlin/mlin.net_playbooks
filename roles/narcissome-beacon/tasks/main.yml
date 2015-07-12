@@ -13,6 +13,7 @@
     group: mlin-beacon
     mode: u=rwX,g=rX,o=rX
     recurse: yes
+- service: name=narcissome-beacon state=stopped must_exist=False
 - name: server executable
   get_url:
     url: "https://github.com/mlin/narcissome-beacon/releases/download/{{ TAG }}/beacon_server"
