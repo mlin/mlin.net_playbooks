@@ -1,3 +1,3 @@
 #!/bin/bash -e
 cd /home/mlin/beacon
-zcat mlin_narcissome.beacondata.gz | ./beacon_server --localhost --id=narcissome.mlin.net --organization=mlin.net --description="Mike Lin's Genome" --reference=GRCh37 --catchall="https://www.mlin.net/" --qps 1 --backlog 10 --bucket 4000 >> /var/log/beacon/beacon.log
+zcat mlin_narcissome.beacondata.gz | ./beacon_server --localhost --id=narcissome.mlin.net --organization=mlin.net --description="Mike Lin's Genome -- this Beacon serves 3.7M GRCh37 variants from Mike Lin's whole-genome sequencing data, obtained via Illumina's Understand Your Genome program (March, 2014). The 2x100 HiSeq 2500 data were processed using BWA-MEM, freebayes, and subsequent quality filters; for further details see http://blog.mlin.net/p/blogging-my-genome.html . This Beacon enforces a global request rate limit of 1Hz." --reference=GRCh37 --catchall="https://www.mlin.net/" --qps 1 --backlog 10 --bucket 4000 >> /var/log/beacon/beacon.log
