@@ -76,6 +76,10 @@ server {
 	#location ~ /\.ht {
 	#	deny all;
 	#}
+	
+	location ~ /\. {
+  		deny all;
+	}
 }
 
 # redirect http://mlin.net to http://www.mlin.net
